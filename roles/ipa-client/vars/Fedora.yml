@@ -1,0 +1,3 @@
+ipaclient_install_command: '/sbin/ipa-client-install'
+ipaclient_packages:
+ - freeipa-client

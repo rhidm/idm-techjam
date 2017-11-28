@@ -1,0 +1,27 @@
+---
+# IPA admin and directory manager passwords
+ipa_directory_manager_password: Secret123
+ipa_admin_password: Secret123
+
+# Desired REALM for IPA.
+# Must ben in all CAPS
+ipa_realm: EXAMPLE.LOCAL
+
+# Desired DOMAIN for IPA.
+# lowercase. Usually matches realm.
+ipa_domain: example.local
+
+# Hostname of IPA server.
+# Pulled from ansible facts. Can be modified/customized here.
+hostname: "{{ ansible_fqdn }}"
+
+# IP Address of IPA server
+ipa_ipaddress: "{{ ansible_default_ipv4.address }}"
+
+# If using DNS, add forwarder here.
+# Default: 8.8.8.8
+ipa_dns_forwarder: 8.8.8.8
+
+# IANA reverse zone address
+# Example 1.168.192.in.addr.arpa
+ipa_reverse_zone: 1.168.192.in.addr.arpa

@@ -1,0 +1,34 @@
+---
+- name: Installing IPA
+  package: name={{item}} state=installed
+  with_items:
+    - ipa-server
+    - ipa-admintools
+    - ipa-server-dns
+    - ipa-client
+    - ipa-server-trust-ad
+
+- name: configuring firewall services
+  firewalld: service={{item}} permanent=true state=enabled
+  with_items:
+    - freeipa-ldap
+    - freeipa-ldaps
+    - freeipa-replication
+
+- name: reload the firewall
+  command: firewall-cmd --reload
+
+- name: installing IPA
+  command: >
+    ipa-server-install
+    --unattended
+    --realm={{ ipa_realm }}
+    --domain={{ ipa_domain }}
+    --ds-password={{ ipa_directory_manager_password }}
+    --admin-password={{ ipa_admin_password }}
+    --mkhomedir
+    --hostname={{ hostname }}
+    --ip-address={{ ipa_ipaddress }}
+    --setup-dns
+    --forwarder={{ ipa_dns_forwarder }}
+    --reverse-zone={{ ipa_reverse_zone }}

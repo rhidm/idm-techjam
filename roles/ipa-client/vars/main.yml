@@ -1,0 +1,19 @@
+
+---
+ipaclient_supported_os:
+  - Centos-6
+  - Centos-7
+  - Fedora-25
+  - Fedora-26
+  - Fedora-27
+  - RedHat-6
+  - RedHat-7
+ipaclient_server: idm.example.local
+ipaclient_domain: idm.example.local
+ipaclient_enroll_user: admin
+ipaclient_enroll_pass: Secret123
+ipaclient_hostname: "{{ ansible_fqdn }}"
+ipaclient_force_join: false
+ipaclient_enable_ntp: true
+ipaclient_all_ip_addresses: true
+ipaclient_enable_dns_updates: true

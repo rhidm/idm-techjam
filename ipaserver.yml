@@ -1,0 +1,9 @@
+---
+- hosts: ipa-server
+  name: Install and configure IPA Server
+  remote_user: root
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - ipa-server

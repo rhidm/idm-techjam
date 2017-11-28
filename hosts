@@ -1,0 +1,13 @@
+ipa-server:
+  hosts:
+    idm.example.local:
+      hostname: idm.example.local
+      domain: example.local
+      ip: 192.168.1.110
+      
+ipa-client:
+  hosts:
+    idm-client.example.local:
+      hostname: idm-client.example.local
+      domain: example.local
+      ip: 192.168.1.111

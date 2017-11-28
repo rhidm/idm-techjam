@@ -1,0 +1,55 @@
+---
+- name: Assert supported distribution
+  assert:
+    that:
+      - ansible_distribution + '-' + ansible_distribution_major_version in ipaclient_supported_os
+
+- name: Assert required variables
+  assert:
+    that:
+      - ipaclient_server is defined
+      - ipaclient_domain is defined
+      - ipaclient_enroll_user is defined
+      - ipaclient_enroll_pass is defined
+
+- name: Import variables
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: Install required packages
+  with_items: "{{ ipaclient_packages }}"
+  package:
+    state: present
+    name: "{{ item }}"
+
+- name: Add hosts record for idm.example.local
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^192\.168\.1\.110'
+    line: '192.168.1.110 idm.example.local'
+    owner: root
+    group: root
+    mode: 0644
+    
+- name: Check if host is enrolled
+  register: ipaclient_ipaconf
+  check_mode: no
+  stat:
+    path: /etc/ipa/default.conf
+
+- name: Enroll host in domain
+  become: true
+  when: not ipaclient_ipaconf.stat.exists
+  command: >
+    {{ ipaclient_install_command }}
+    {{'--hostname=' + ipaclient_hostname if ipaclient_hostname is defined else ''}}
+    --server={{ ipaclient_server }}
+    --domain={{ ipaclient_domain }}
+    --principal={{ ipaclient_enroll_user }}
+    --password={{ ipaclient_enroll_pass }}
+    --ssh-trust-dns
+    --mkhomedir
+    {{ '--enable-dns-updates' if ipaclient_enable_dns_updates else ''}}
+    --unattended
+    {{ '--all-ip-addresses' if ipaclient_all_ip_addresses else ''}}
+    {{ '--no-ntp' if not ipaclient_enable_ntp else ''}}
+    {{ '--force-join' if ipaclient_force_join else ''}}

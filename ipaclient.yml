@@ -1,0 +1,9 @@
+---
+- hosts: ipa-client
+  name: Enroll in ipa domain
+  remote_user: root
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - ipa-client

@@ -1,0 +1,27 @@
+---
+supported_os:
+  - Centos-6
+  - Centos-7
+  - Fedora-25
+  - Fedora-26
+  - Fedora-27
+  - RedHat-5
+  - RedHat-6
+  - RedHat-7
+pool:
+rhn_user:
+rhn_pass: 
+dns_server: 8.8.8.8
+dns_search: example.local
+
+# OS Specific Variables
+
+# Repos
+rhel_7_base_channels:
+  - rhel-7-server-rpms
+
+rhel_6_base_channels:
+  - rhel-6-server-rpms
+
+rhel_5_base_channels:
+  # TODO

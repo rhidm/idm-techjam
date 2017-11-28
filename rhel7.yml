@@ -1,0 +1,9 @@
+---
+- hosts: ipa-lab
+  name: Begin initial config of host
+  remote_user: root
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - common
