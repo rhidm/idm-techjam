@@ -41,3 +41,25 @@
   with_items:
     - "{{ groupnames }}"
   when: section == 2
+
+- name: Including hbac vars
+  include_vars: "{{ item }}"
+  with_items:
+    - main.yml
+    - hbac.yml
+  when: section == 3
+
+- name: Creating hbac rules
+  ipa_hbacrule:
+    name: "{{ item.rulename }}"
+    description: "{{ item.description }}"
+    host: "{{ item.host }}"
+    usergroup: "{{ item.usergroup }}"
+    servicecategory: "{{ item.servicecategory }}"
+    state: present
+    ipa_host: "{{ ipa_host }}"
+    ipa_user: "{{ ipa_admin }}"
+    ipa_pass: "{{ ipa_admin_passwd }}"
+  with_items:
+    - "{{ hbacrules }}"
+  when: section == 3

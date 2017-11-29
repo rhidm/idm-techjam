@@ -1,0 +1,4 @@
+---
+hbacrules:
+  - { rulename: 'allow_admin_all', description: 'Allow all all admins to access all hosts.', host: [idm.example.local, idm-client.example.local], usergroup: ['admins', 'sysadmins'], servicecategory: 'all' }
+  - { rulename: 'allow_devs_client', description: 'Allow all devs to access client.', host: 'idm-client.example.local', usergroup: ['softwaredevs', 'appdev'], servicecategory: 'all' }
