@@ -1,0 +1,8 @@
+---
+user_password: Secret123
+
+users:
+  - { name: "Dave Developer", first: "Dave", last: "Developer", uid: "ddeveloper", email: "ddeveloper@example.local", phone: "555-867-5309", shell: "/bin/bash", password: "{{ user_password }}" }
+  - { name: "Suzy Sysadmin", first: "Suzy", last: "Sysadmin", uid: "ssysadmin", email: "ssysadmin@example.local", phone: "555-555-6832", shell: "/bin/bash", password: "{{ user_password }}" }
+  - { name: "Dan Dbadmin", first: "Dan", last: "Dbadmin", uid: "ddbadmin", email: "ddbadmin@example.local", phone: "555-555-1239", shell: "/bin/bash", password: "{{ user_password }}" }
+  - { name: "Adam Appdev", first: "Adam", last: "Appdev", uid: "aappdev", email: "aappdev@example.local", phone: "555-555-3226", shell: "/bin/bash", password: "{{ user_password }}" }

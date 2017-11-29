@@ -1,0 +1,11 @@
+---
+- hosts: ipa-server
+  name: Create users in IPA
+  remote_user: root
+  become: yes
+  become_method: sudo
+  become_user: root
+  vars:
+    section: 1
+  roles:
+    - ipa-lab

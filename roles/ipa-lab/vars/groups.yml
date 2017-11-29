@@ -1,0 +1,5 @@
+---
+groupnames:
+  - { groupname: 'sysadmins', users: ['ssysadmin'] }
+  - { groupname: 'appdev', users: ['aappdev','ddeveloper','ddbadmin'] }
+  - { groupname: 'softwaredevs', users: ['aappdev','ddeveloper'] }

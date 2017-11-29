@@ -1,3 +1,43 @@
 ---
-- name: Create Users
-  
+- name: Including user vars
+  include_vars: "{{ item }}"
+  with_items:
+    - main.yml
+    - users.yml
+  when: section == 1
+
+- name: Creating Users
+  ipa_user:
+    uid: "{{ item.uid }}"
+    givenname: "{{ item.first }}"
+    sn: "{{ item.last }}"
+    displayname: "{{ item.name }}"
+    mail: "{{ item.email }}"
+    telephonenumber: "{{ item.phone }}"
+    loginshell: "{{ item.shell }}"
+    password: "{{ item.password }}"
+    ipa_host: "{{ ipa_host }}"
+    ipa_user: "{{ ipa_admin }}"
+    ipa_pass: "{{ ipa_admin_passwd }}"
+  with_items:
+    - "{{ users }}"
+  when: section == 1
+
+- name: Including group vars
+  include_vars: "{{ item }}"
+  with_items:
+    - main.yml
+    - groups.yml
+  when: section == 2
+
+- name: Creating groups
+  ipa_group:
+    name: "{{ item.groupname }}"
+    user: "{{ item.users }}"
+    state: present
+    ipa_host: "{{ ipa_host }}"
+    ipa_user: "{{ ipa_admin }}"
+    ipa_pass: "{{ ipa_admin_passwd }}"
+  with_items:
+    - "{{ groupnames }}"
+  when: section == 2

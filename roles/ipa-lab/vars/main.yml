@@ -1,1 +1,4 @@
 ---
+ipa_host: idm.example.local
+ipa_admin: admin
+ipa_admin_passwd: Secret123
