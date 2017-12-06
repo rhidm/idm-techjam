@@ -8,6 +8,9 @@
 - User will have root access to the Vm's either directly or as the result of sudo
 - User will have access to a valid domain or subdomain that can be managed by the IdM server
 - User will have access to the repos required to install software
+- User on the host machine will need to be either root or a local user on the VM's with sudoers setup for
+ <username>        ALL=(ALL)       NOPASSWD: ALL
+
 
 ### OS specific
 - Red Hat
